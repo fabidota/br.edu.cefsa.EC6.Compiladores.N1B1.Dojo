@@ -2,20 +2,20 @@ package br.edu.cefsa.EC6.Compiladores.N1B1.Dojo;
 
 public class Lexema {
 	
-	private String posicao;
+	private Long posicao;
 	private String token;
-	private String tipo;
+	private Tipo tipo;
 	
-	public Lexema(String posicao, String token, String tipo) {
+	public Lexema(Long posicao, String token, Tipo tipo) {
 		this.posicao=posicao;
 		this.token=token;
 		this.tipo=tipo;		
 	}
 	
-	public String getPosicao() {
+	public Long getPosicao() {
 		return posicao;
 	}
-	public String getTipo() {
+	public Tipo getTipo() {
 		return tipo;
 	}public String getToken() {
 		return token;
@@ -23,7 +23,7 @@ public class Lexema {
 	
 	@Override
 	public String toString() {
-		return String.format("%-10s  %-20s  %s", this.posicao, this.token, this.tipo);
+		return String.format("%-20d  %-20s  %s", this.posicao, this.token, this.tipo);
 	}
 
 }

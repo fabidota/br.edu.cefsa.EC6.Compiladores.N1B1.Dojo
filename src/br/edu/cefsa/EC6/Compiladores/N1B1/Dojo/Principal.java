@@ -2,34 +2,47 @@ package br.edu.cefsa.EC6.Compiladores.N1B1.Dojo;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.nio.charset.StandardCharsets;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.*;
 
 public class Principal {
 
-	private static Set<String> pr;
+	private static Set<String> prs;
+	private static Set<Lexema> objs;
+	private static Set<Lexema> tokens;
+	private static final String arquivoPR = "palavras reservadas js_semvar.txt";
+	private static final String arquivoLeituraJS = "jquery-3.6.0.txt";
+	private static final String arquivoSaida = "lexemas.lex";
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) {
 
-		// criaListaPr();
-		formataStringLeitura();
+		try {
+			tokens = new HashSet<Lexema>();
+			criaListaPr();
+			// formataStringLeitura();
 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public static void criaListaPr() throws FileNotFoundException {
-		pr = new HashSet<String>();
+		prs = new HashSet<String>();
 
-		Scanner scanner = new Scanner(new File(
-				"C:\\Users\\fabid\\OneDrive\\FTT\\EC6\\Linguagem de Programação II\\Workspace Eclipse\\br.edu.cefsa.EC6.Compiladores.N1B1.Dojo\\bin\\br\\edu\\cefsa\\EC6\\Compiladores\\N1B1\\Dojo\\palavras reservadas js.txt"));
+		Scanner scanner = new Scanner(new File(arquivoPR));
 		String texto = "";
 		while (scanner.hasNextLine()) {
 			texto += scanner.nextLine();// .replace("\n","").replace("\r","") ;
 		}
 		String[] lista_pr = texto.split(",");
 		for (String string : lista_pr) {
-			pr.add(string);
+			prs.add(string);
 			System.out.println(string);
 		}
 
@@ -37,8 +50,7 @@ public class Principal {
 
 	public static void formataStringLeitura() throws FileNotFoundException {
 
-		Scanner scanner = new Scanner(new File(
-				"C:\\Users\\fabid\\OneDrive\\FTT\\EC6\\Linguagem de Programação II\\Workspace Eclipse\\br.edu.cefsa.EC6.Compiladores.N1B1.Dojo\\bin\\br\\edu\\cefsa\\EC6\\Compiladores\\N1B1\\Dojo\\jquery-3.6.0.txt"));
+		Scanner scanner = new Scanner(new File(arquivoLeituraJS));
 		String allString = "";
 
 		String actualLine = "";
@@ -57,25 +69,30 @@ public class Principal {
 
 	}
 
-	private static void testandoFileInputStream() throws Exception {
+	private static void gravaDados() throws Exception {
 
-		FileInputStream arquivo = new FileInputStream("hello.txt");
-		InputStreamReader inputStreamReader = new InputStreamReader(arquivo);
-		int c = inputStreamReader.read();
+		FileWriter fw = new FileWriter(arquivoSaida, StandardCharsets.UTF_8);
+		BufferedWriter escreveArquivo = new BufferedWriter(fw);
 
-		while (c != -1) {
-			System.out.print((char) c);
-			c = inputStreamReader.read();
+		for (Lexema lexema : tokens) {
+			escreveArquivo.write(lexema.toString());
+			escreveArquivo.newLine();
+			escreveArquivo.flush();
 		}
-		inputStreamReader.close();
+		escreveArquivo.close();
 	}
 
-	public void lixo() {
+	public void lixo() throws Exception {
 
-		Lexema l = new Lexema("2", "teste", "variavel");
+		Lexema l = new Lexema(2L, "teste", Tipo.VARIAVEL);
+		System.out.println(l);
 
-		// System.out.println(l);
-
+		
+		tokens.add(new Lexema(1L, "teste", Tipo.VARIAVEL));
+		tokens.add(new Lexema(2L, "2.5f", Tipo.FLOAT));
+		tokens.add(new Lexema(85L, "if", Tipo.PALAVRARESERVADA));
+		gravaDados();
+		
 		/*
 		 * varredura antiga while (scanner.hasNextLine()) { allString +=
 		 * scanner.nextLine();//.replace("\n","").replace("\r","") ; }
