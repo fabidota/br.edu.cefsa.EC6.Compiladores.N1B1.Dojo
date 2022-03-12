@@ -1,0 +1,31 @@
+Desafio 1: DOJO - Analisador Léxico (N1 1B)
+Atividade, código, a ser realizada em sala de aula com os alunos em "pair programming" DOJO (6 equipes). Parser de JavaScript.
+
+Times em salas distintas no MS Teams
+
+Projeto em Java 11+ ou superior, usar IDE Eclipse, Netbeans ou Visual Studio Code.
+
+Código fonte a ser analisádo em JavaScript: https://code.jquery.com/jquery-3.6.0.js
+
+1. Abrir arquivo texto com código fonte
+2. Transformar em "input stream" eliminar comentários, identações, quebras de linha, tabs etc...
+3. Criar uma tabela com as palavras reservadas da linguagem JavaScript
+4. Quebrar o código em tokens
+5. Identificar os tokens
+6. Gerar tabela de lexemas (arquivo texto de saída .lex), colunas:
+	1. # da Coluna onde o token se inicia no string
+	2. token
+	3. tipo (variável, palavra reservada, operador, método, função, inteiro, float, string, objeto...)
+Esta atividade utiliza muita manipulação de arquivo texto (código fonte), strings, regexp e listas
+
+Esta atividade explora o nível cognitivo CRIAR conforme a taxonomia de Bloom.
+
+Coding DOJO: https://pt.wikipedia.org/wiki/Coding_Dojo
+
+Pair programming: https://www.devmedia.com.br/implementando-pair-programming-em-sua-equipe/1694
+
+No Moodle fornecer o link para o código do analisador léxico em Java publicado no GitHub
+
+Esta atividade explora a teoria do livro do Dragão cap 1 ao 3.
+
+Esta atividade compõe a nota para N2 1 Bimestre
